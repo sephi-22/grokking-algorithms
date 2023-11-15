@@ -1,0 +1,25 @@
+The algorithm to solve a shortest-path problem is called breadth-first search.
+1. Model the problem as a graph
+2. Solve the problem using breadth-first search.
+
+Graph are made up of node and edges. A node can be directly connected to many other nodes. Those nodes are called neighbors
+Breadth-first search can answer the following questions:
+1. Is there a path from node A to node B
+2. What is the shortest path from node A to node B
+
+Queues: A queue works like a stack, but while a queue is a FIFO (First In First Out) structure, a stack is a LIFO (Last In, First Out)
+structure. Queues have only two operations - enqueue and dequeue. You can enqueue two elements. The element that was enqueued first
+gets dequeued first. In other words, the element that is added first is removed first. Queueing is used in breadth first search in the 
+sense that first degree neighbors and enqueued before second degree neighbors, and they are dequeued first before second degree neighbors
+
+Run the breadth-first search algorithm on each of these graphs to find the solution.
+6.1 Find the length of the shortest path from start to finish.
+A: S->top-left->F - 2
+
+6.2 Find the length of the shortest path from 'cab' to 'bat.
+A: Cab ->cat -> bat - 2
+
+Implementing the graph in code can be as simple as using a dictionary. You can map each person to an array of their neighbors.
+A directed graph is like A->B where B is A's neighbor, but A isn't B's neighbor. In other words, the relationship is one way.
+
+An undirected graph does not have any arrows, and both nodes are each other's neighbors. 

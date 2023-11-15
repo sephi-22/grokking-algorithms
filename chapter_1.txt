@@ -1,0 +1,20 @@
+1.1 Suppose you have a sorted list of 128 names, and you're searching through it using binary search.
+What's the maximum number of steps it would take?
+A: Binary search is O(logn) complexity. Therefore it would take log128 or 7 steps.
+Or: 128->64->32->16->8->4->2->1 (7 arrows)
+
+1.2 Suppose you double the size of the list. What's the maximum number of steps now?
+A: 8 steps.
+Or: 256->128->64->32->16->8->4->2->1 (8 arrows)
+
+1.3 You have a name, and you want to find the person's phone number in the phone book.
+A: O(logn) (Binary search since phone book is sorted)
+
+1.4 You have a phone number, and you want to find the person's name in the book (Hint: You'll have to search through the whole book!)
+A: O(n)
+
+1.5 You want to read the n umbers of every person in the phone book.
+A: O(n)
+
+1.6 You want to read the numbers of just the As
+A: O(n) (Constants don't matter)

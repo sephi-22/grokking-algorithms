@@ -1,0 +1,50 @@
+Which of these hash functions are consistent?
+5.1 f(x) = 1 <- Returns "1" for all input
+5.2 f(x) = rand() <- Returns a random number every time
+5.3 f(x) = next_empty_slot() <- Returns the index of the next empty slot in the hash table
+5.5 f(x) = len(x) <- Uses the length of the string as the index
+
+A consistent hash function is one which for the same input, always returns the same output. So in these 4 examples, 5.1 and 5.4
+are consistent as they will give the same output when the input given is the same string.
+
+A good rule of thumb is resize your hash table when the load factor is greater than 0.7.
+
+It's important for hash functions to have a good distribution. They should map items as broadly as possible. The worst case is a
+hash function that maps all items to the same slot in the hash table.
+Suppose you have thse four hash functions that work with strings:
+A. Return "1" for all input
+B. Use the length of the string as the index
+C. Use the first character of the string as the index. So, all strings starting with a are hashed together, and so on.
+D. Map every letteer to a prime number: a =2, b=3, c=5, d=7, e=11 and so on. For a string, the hash function is the sum
+of all characters modulo the size of the hash. For example, if your hash size is 10, and the string is "bag", the index is
+3+2+17%10 = 22%10 = 2
+
+For each of these examples, which hash function would provide a good distribution? Assume a hash table size of 10 slots.
+
+5.5 A phonebook where the keys are names and values are phone numbers. The names are as follows: Esther, Ben, Bob and Dan
+Answer: D and C would give a good distribution
+5.6 A mapping from battery size to power. The sizes are A, AA, AAA, and AAAA
+Answer: B and D would give a good distribution
+5.7 A mapping from  book titles to authors. The titles are Maus, Fun Home, and Watchmen
+Answer: Hash functions B, C and D would give a good distribution.
+
+Breadth-first search running time:
+V = Number of vertices
+E = Number of edges
+E edges are traversed to span the entire network
+V are the number of vertices or nodes that are added to queue
+So it is commonly written as O(V+E)
+
+6.3 A is invalid. B. is valid. C. is invalid
+
+6.4 A list for this topologically sorted graph is:
+1. Wake up
+2. Exercise
+3. Brush Teeth
+4. Shower
+5. Pack Lunch
+6. Get Dressed
+7. Eat Breakfast
+
+6.5 Which of the following are also trees?
+Answer: A and C.
