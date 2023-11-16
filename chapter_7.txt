@@ -1,0 +1,4 @@
+7.1 In each of these graphs, what is the weight of the shortest path from start to finish?
+Ans: Graph 1 = 8 (A to B to D to F)
+Graph 2 = 60 (A to B to C to E)
+Graph 3 = Negative edge. Can't use djikstra's. Have to use Bellman Ford. With BF its 4
