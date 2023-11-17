@@ -1,0 +1,133 @@
+Trees:
+Binary search tree data structure. For every node, the nodes to its left are smaller in value, and the nodes to the right
+are larger in value.
+Searching for an element in a binary search tree takes O(log n) time on average and O(n) time in the worst case. Searching
+a sorted array takes O (log n) time in the worst case, so you might think a sorted array is better. But a binary search tree
+is a lot faster for insertions and deletions on average.
+Search - O (logn) Array O(logn) Binary Search Trees
+Insertion - O(n) Array O(logn) Binary Search Trees
+Deletion - O(n) Array O(logn) Binary Search Trees. 
+Binary search trees have down sides too: for one thing, you don't get random access. The performance times are also on average
+and rely on the tree being balanced. If the tree is unbalanced, it doesn't give good performance.
+
+When are binary trees used? B-trees, a special type of binary trees, are commonly used to store data in databases. 
+Check out: 
+- B-trees
+- Red-Black trees (Binary trees that balance themselves)
+- Heaps
+- Splay trees
+
+Inverted Indexes:
+This is how a search engine works. Suppose you have three web pages with simple content. 
+A hash table is build from this content. 
+The keys of the hash table are the words, and the values tell you what pages each word appears on. Now suppose a user searches for a woed.
+You look at what pages the word shows up on. 
+This data structure is called an inverted index, and it's commonly used to build search engines.
+
+The Fourier Transform:
+The fourier transform has a lot of use cases. The Fourier transform is great for processing signals. You can use it to compress music. 
+This is what MP3 is based on. Fourier transform is used to try to predict earthquakes and analyze DNA. You can use it to build an app
+like Shazam, which guesses what song is playing. 
+
+Parallel Algorithms:
+These algorithms are about scalability and working with a lot of data. Laptops and computers ship with multiple cores. To speed up
+our algorithms, we need to change them to run in parallel across all cores at once. 
+Example: The best you can do with a shorting algorithm is roughly O(nlogn) time. It's well know you can't sort an array in O(n) time,
+UNLESS you use a parallel algorithm. There's a parallel version of quicksort that will sort an array in O(n) time.
+
+Parallel algorithms are hard to design. And its also hard to make sure they work correctly and to figure out what type of speed boost you'll
+see. The time gain isn't linear. So if you have two cores in the laptop, it doesn't mean the algorithm will work twice as fast. 
+There are a couple of reasons for this:
+1. Overhead of managing the parallelism - If we divide an array into two cores and merge them back, the merging takes time.
+2. Load Balancing - Suppose you have 10 tasks to do, so you give each core 5 tasks. A gets all the easy tasks, so it is done in 10 seconds
+but B gets all the hard tasks so it takes a minute, while A idles for 50 seconds. How do you distribute the work evenly so both cores are
+working equally hard? 
+
+MapReduce: 
+There's a special type of parallel algorithm that is becoming increasingly popular: The distributed algorithm. The MapReduce algorithm
+is a popular distributed algorithm. You can use it through the popular open source tool Apache Hadoop.
+
+Why are Distributed Algorithms useful?
+Suppose you ahve a table with billions or trillions of rows, and you want to run a complicted SQL query on it. You can't run it on MySQL,
+because it struggles after a few billion rows. Use MapReduce.
+Or suppose you have to process a long list of jobs. Each job takes 10 seconds to process, and you need to process 1 million jobs like this.
+If you do this on one machine, it will take you months.  if you could run it across 100 machines, you might be done in a few days.
+
+Distributed algorithms are great when you hav a lot of work to do and want to speed up the time required to do it. MapReduce in 
+particular is built up from two simple ideas: the map function and the reduce function.
+
+The map function:
+The map function is simple: it takes an array and applies the same function to each item in the array. For example: we're doubling
+every item in an array:
+arr1 = [1,2,3,4,5]
+arr2 = map[lambda x: 2*x, arr1]
+[2,4,6,8,10]
+
+But let's say we apply a function that takes more time to process. 
+arr1 = # A list of URLs
+arr2 = map(download_page, arr1)
+Here you have a list of URLs and you want to download each page and store the contents in arr2. This could be really fast if you could 
+spread it across 1000 machines.
+
+The Reduce Funtion:
+The reduce function reduces a whole list of items into one item. With map you go from one array to another. With reduce, you 
+transform an array into a single item.
+Example:
+arr1 = [1,2,3,4,5]
+reduce(lambda x,y: x+y, arr1)
+
+MapReduce uses these two simple concepts to run queries about data across multiple machines. When you have a large dataset (billions of rows)
+, MapReduce can give you an answer in minutes where a traditional database might take hours.
+
+Bloom Filters and HyperLogLog:
+Suppose reddit, bit.ly or google need to look up a hash to see if they've already processed a URL before. 
+The hash contains the URL with the value YES OR NO. Looking up a value in a hash table is O(1) time. So this is easy.
+Except there are trillions of links and URLs so these hash tables take up a lot of space. This is where you have to get creative.
+
+Bloom Filters:
+Bloom filters are probabilistic data structure. They give you an answer that could be wrong but is probably correct. Instead of a hash,
+you can ask your bloom filter if you've crawled this URL before. A hash table gives you the correct answer. A bloom filter will give you
+an answer that is probably correct. 
+1. False positives are possible. Google might say "You've already crawled this site" even if you haven't
+2. False negatives aren't possible. If the bloom filter says "You haven't crawled this site" then you definitely haven't crawled that site.
+
+Bloom filters are great because they take up very little space. A hash table would have to store every URL but a bloom filter doesn't need to.
+
+HyperLogLog:
+Along the same lines is another algorithm called HyperLogLog. Suppose Google wants to count the number of unique searched performed by its
+users. Or suppose Amazon wants to count the number of unique items that are looked a today. Answering these questions takes a lot of space. 
+With Google, you'd have to keep a log of all the unique searches. When a user searches something, you have to see whether it's already in the log.
+If not, you have to add it to the log. HyperLogLog approximates the number of unique elements in a set. It won't give you an exact answer,
+but it comes very close and uses a fraction of the memory that the taks would otherwise take.
+
+The SHA Algorithms:
+Comparing Files: SHA is a hash function (Secure Hash Algorithm).
+Given a string, SHA gives you a hash for that string.
+SHA goes from string to string, but hash function for hash tables went from string to array index.
+SHA hashes are long. They've been truncated before. 
+You can use SHA to tell whether two files are thee same. 
+
+Checking Passwords:
+SHA is also useful when you want to compare strings without revealing what the original string was. 
+SHA gets you one way hash of the string. If you know the string, you can get the hash, but if you know the hash, you can't get the string.
+bcrypt is the gold standard for password-hashing functions at the time of the writing of this book.
+
+Locality-Sensitive Hashing:
+SHA has another important feature: It's locality insensitive. Changing one letter in a string changes its hash completely. This way a 
+hacker can't compare hashes to see if they're close to hacking a password. If you want a locality-sensitive hash function, you use 
+Simhash. Simhash generates a hash that's only a little different. This allows you to compare hashes and see how similar two strings are, which
+is pretty useful.
+- Google uses simhash to detect duplicates while crawling the web
+- A teacher could use simhash to see whether a student was copying as essay from the web.
+Simhash is useful when you want to check for similar items.
+
+Diffie-hellman Key Exchange:
+The diffie-hellman algorithm deserves a mention here, because it encrypts a message so it can only be read by the person we sent it to.
+- Both parties don't need to know the cipher. Sow e don't have to meet and agree to what the cipher should be.
+- The encrpyted messages are extremely hard to decode. 
+DHKE has two elements - a public key and a private key. When someone wants to send you a message, they encrypt it using the public key, 
+the encrypted message can only be decrypted with the private key. RSA is its successor. 
+
+Linear Programming:
+All the graph algorithms can be done through linear programming instead. Linear programming is a general framework, and graph problems
+are a subset of that. It uses the simplex algorithm. 

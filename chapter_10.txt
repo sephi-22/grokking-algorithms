@@ -1,0 +1,66 @@
+k-nearest neighbors (KNN) algorithm is used for classification.
+1. You get something to classify.
+2. You look at its nearest neighbors.
+3. More neighbors are oranges, so it is probably an orange.
+
+The KNN algorithm is simple but useful. If you're trying to classify something, you want to try KNN first.
+
+Building a Recommendation System:
+A system like Netflix can plot users close to their similarities. Then you plot a new user, then recommend movies to this user whose
+profile matches their nearest neighbors.
+
+There's a question: You graphed the users by similarity. How do you figure out how similar two users are?
+
+Feature Extraction:
+To find the distance between two points, you use the pythagorean formula = sqrt((x1-x2)^2 + (y1-y2)^2)
+In a system like netflix, say we let the users give scores to 5 genres of movies based on preference, now we're finding the distance in 
+5 dimensions, but the formula remains the same.
+sqrt((a1-a2)^2 + (b1-b2)^2 + (c1-c2)^2 + (d1-d2)^2 + (e1-e2)^2)
+It just involves a set of five numbers instead of a set of two numbers.
+The distance tells you how similar those numbers are.
+
+EXERCISES: 
+10.1 In the Netflix example, you calculated the distance between two different users using the distance formula. But not all users
+rate movies the same way. Suppose you have two users, Yogi and Pinky, who have the same taste in movies. But Yogi rates any movie he
+likes as a 5, whereas Pinky is choosier and reserves the 5s for only the best. They're well matched, but according to the distance 
+algorithm, they aren't neighbors. How would you take their different rating strategies into account?
+Ans: You could use something called normalization, like Z-index normalization. You look at the average rating for each person and use
+it to scale their ratings. For example, you might notice that Pinky's average rating is 3, whereas Yogi's average rating is 3.5. So you
+bump up Pinky's ratings a little, until her average rating is 3.5 as well. Then you can compare their ratings on the same scale.
+
+10.2 Suppose Netflix nominates a group of "influencers". For example, Quentin Tanrantino and Wes Anderson are influencers on Netflix, 
+so their ratings count for more than a normal user's. How would you change the recommentations system so it's biased towards the 
+ratings of the influencers? 
+Ans: You could give more weight to the ratings of the influencers when using KNN. Suppose you have three neighbors: Joe, Dave, and Wes
+Anderson (an influencer). They arted Caddyshack a 3, a 4 and a 5, respectively. Instead of just taking the average of their ratings 
+(3+4+5/3 = 4 stars), you could give more weight to Wes Anderson's rating: 3+4+5+5+5/5 = 4.4 stars
+
+Regression:
+There are two things you could do with KNN - classification and regression. 
+Regression = predicting a response (like a number)
+Regression is very useful. 
+
+Cosine Similarity:
+Suppose two users love the same movie, but one of them likes it way more and the other one is conservative with ratings.
+One rates it 5 stars while the other rates it 4 stars. Eventually, their distance difference will be so far apart that they 
+won't be counted as neighbors. To deal with this, we can look at cosign similarity. This is the angle between the two vectors.
+
+Picking Good Features:
+Picking the right features means:
+1. Features that directly correlate tot he movies you're trying to recommend.
+2. Features that don't have a bias (for example, if you ask the users to only rate comedy movies, that doesn't tell you about action)
+
+Exercise:
+10.3 Netflix has millions of users. The earlier example looked at the five closest neighbors for building the recommendations system.
+Is this too low? Too high?
+Answer: This is too low. 
+If you look at fewer neighbors, there's a bigger chance that the results will be skewed. A good rule of thumb is, if you have N users,
+you should look at sqrt(N) neighbors.
+
+Introduction to Machine Learning:
+OCR: OCR stands for Optical Character Recognition. It means you can take a photo of a page of text, and your computer will automatically
+read the text for you. OCR can use KNN. OCR measures curves, points, anad measure lines. When you get a new character, you Extract
+the same features from it. 
+
+Building a Spam Filter: 
+Spam filters use another simple algorithm called the Naive bayes Classifier. First you train your Naive Bayes classifier on some data.

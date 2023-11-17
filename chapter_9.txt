@@ -1,0 +1,102 @@
+If we consider every set of the knapsack problem, including the empty set (power set), we get O(2^n) time complexity, which is similar
+to the set problem in chapter 8 (radio stations). Exponential time complexity is not desired. If we use greedy algorithm (approximation)
+we will not get the optimal solution (check chapter_9_greedy.py). 
+
+What do we do if we want the optimal solution? We use dynamic programming.
+Dynamic problem solves subproblems and builds up to solving the big problem. For the knapsack problem, we will start by solving For
+smaller knapsacks (or "sub" knapsacks) then working towards the original problem.
+
+Every dynamic programming algorithm starts with a grid (Verify this later).
+
+Exercise: 
+9.1 Suppose you can steal another item: an MP3 player. It weighs 1 lb and is worth $1000, should you steal it?
+Answer: Yes. Theny ou could steal the MP3 player, the iphone and the guitar, worth a total of $4500.
+
+What happens if you add an item?
+Nothing changes.
+
+What happens if you change the order of the rows? 
+The answer does not change.
+
+Can you fill in the grid column-wise instead of row-wise?
+For this problem, it does not make a difference, but it could for other problems.
+
+What happens if you add a smaller item? 
+You have to account for smaller granularity, so the grid has to change.
+
+Can you steal fractions of an item?
+You can't. With dynamic-programming solution, you either take the item or not. There's no way for it to figure out that you 
+should take half an item. But this can be solved using a greedy approach.
+
+Handling items that depend on each other:
+Dynamic programming is powerful because it can solve subproblems and use those answers to solve the big problem. Dynamic programming
+only works when each subproblem is discrete- when it doesn't depend on other subproblems. 
+
+Is it possible that the solution will require more than two sub-knapsacks?
+It's possible that the best solution involves stealing more than two items. The way the algorithm is set up, you're combining
+two knapsacks at most - you'll never have more than two sub-knapsacks. But it's possible for those sub-knapsacks to have their own sub-knapsacks.
+
+It is possible that the best solution doesn't fill the knapsack completely?
+Yes. Absolutely possible.
+
+Exercise: 9.2
+Answer; You fill it with Camera Water and Food.
+
+Takeaways of Dynamic Programming:
+1. Dynamic Programming is useful when you're trying to optimize something given a constraint. In the knapsack problem, you had to 
+maximize the value of the goods you stole, constrained by the size of the knapsack.
+2. You can use dynamic programming when the problem can be broken into discrete subproblems, and they don't depend on each other.
+
+It can be hard to come up with a dynamic-programming solutiong. That's what we'll focus on in this section. Some general tips:
+1. Every dynamic-programming solution involves a grid.
+2. The values in the cells are usually what you're trying to optimize. For the knapsack problem, the values were the values of the goods..
+3. Each cell is a subproblem, so think about how you can divide your problem into subproblems. That will help you gigure out what 
+the axes are.
+
+Let's look at another example. Suppose you run dictionary.com Someone types in a word wrong. You want to be able to guess what word they meant.
+(LONGEST COMMON SUBSTRING)
+
+Making the Grid: 
+What does the grid for this problem look like? 
+1. What are the values of the cells?
+2. How do you divide this problem into subproblems?
+3. What are the axes of the grid?
+In dynamic programming, you're trying to MAXIMIZE something. In this care, you're trying to find the longest substring that two words
+have in common. 
+
+The values for the cells are usually what you're trying to optimize. In this case, the values will probably be a number: the length of the
+longest substring that the two strings have in common. 
+
+Filling in the Grid: 
+If the letters don't match the value is 0. If they do match, the value is 1+ value of top-left neighbor.
+
+In pseudocode, this looks like:
+if word_a[i]==word_b[j]: 
+cell[i][j]=cell[i-1][j-1]+1
+else:
+cell[i][j]=0
+
+For this problem, the final solution may not be in the last cell. For the knapsack problem, this last cell always had the final solution.
+But for the longest common substring, the solution is the largest number in the grid - and it may not be the last cell.
+
+Longest Common Subsequence:
+FOSH -> FISH = 2 (substring that matches - SH)
+FOSH -> FORT = 2 (substring that matches - FO)
+But FOSH and FISH have 3 letters in common. Instead of comparing longest common substring, we should compare the longest common 
+subsequence: the number of letters in a sequence that the two words have in common. 
+
+Answer: If the ltters don't match, pick the larger of the top and left neighbors. If they do match, this value is value of
+top-left neighbor+1 (just like longest common substring).
+
+In pseudocode:
+if word_a[i]==word_b[j]:
+cell[i][j]=cell[i-1][j-1]+1
+else:
+cell[i][j]=max(cell[i-1][j],cell[i][j-1])
+
+Uses of dynamic programming: 
+-Longest common subsequence to find similarities in DNA strands. 
+- git diff is sused to tell the difference between two files
+- Levenshtein distance measures how wimilar two strings are, and it is used to spell-check or find copyrighted data.
+- Word wrap like in MS Word.
+
