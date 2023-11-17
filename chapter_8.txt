@@ -1,0 +1,91 @@
+Greedy Algorithms: At each step, pick the optimal move.
+In other words, at each step you pick the locally optimal solution, and in the end you're left with the globally optimal solution.
+
+The Knapsack problem:
+This problem doesn't work with greedy algorithms. Suppose we have 3 items - $3000 (30 lbs), $2000 (20 lbs), $1500 (15lbs)
+Our knapsack can only hold 35 lbs. If we pick this approach:
+1. Pick the most expensive thing that will fit in your knapsack
+2. Pick the next most expensive thing that will fit in your knapsack; and so on
+This won't work as we'll fill our knapsack with item 1 and with the remaining 5 lbs we can't store anything else.
+But if we were to put item 2 and 3 in our knapsack we'd have $3500 worth of items.
+
+Exercises:
+8.1: You work for a furniture company, and you have to ship furniture all over the country. You need to pack your truck with boxes.
+All of the boxes are of different sizes, and you're trying to maximize the space you use in each truck. How would you pick boxes to 
+maximise space? Come up with a greedy strategy. Will that give you the optimal solution?
+
+My Answer: Arrange the boxes in ascending or descending order of size. Then start with the smallest box that can fit, then fit the next
+largest box and so on. This probably won't give the optimal solution.
+
+Book's answer: A greedy strategy would be to pick the largest box that will fit in the remaining space, and repeat until you can't 
+pack any more boxes. No, this will not give you the optimal solution.
+
+8.2 You're going to Europe, and you have seven days to see everything you can. You assign a point value to each item (how much you
+want to see it) and estimate how long it takes. How can you maximize the point total (seeing all the things you really want to see)
+during your stay? Come up with a greedy strategy. Will that give you the optimal solution?
+
+My Answer: Start with the item with the most point value, see that first. That go to the item with the next highest point value that
+can fit in the remaining days. See that. And so on. No, it won't give you the optimal solution.
+Book's Answer: Same
+
+The Set Covering Problem:
+Suppose you're starting a radio show. You want to reach listeners in all 50 states. You have to decide what stations to play on to
+reach all those listeners. It costs money to be on each station, so you're trying to minimize the number of stations you play on.
+You have a list of stations. Each station covers a region, and there's overlap. 
+How do you figure out the smallest set of stations you can play on to cover all 50 states? 
+Here's one approach:
+1. List every possible subset of stations. This is called the power set. There are 2^n possible subsets.
+2. From these, pick the set with the smallest number of stations that covers all 50 states.
+
+The problem is that it takes a long time to calculate every possible subset of stations. It takes O(2^n) time, because there are
+2^n stations. It's possible to do if you ahve a small set of 5 to 10 stations. But if we have a lot of items, say 100 stations,
+it will take 4 * 10^21 years.
+
+Approximation Algorithms: 
+A greedy algorithm can help us out here. 
+1. Pick the station that covers the most states that haven't been covered yet. It's ok if the station covers some states that have 
+been covered already.
+2. Repeat until all the states are covered.
+This is called an approximation algorithm. This works when calculation the exact solution will take too much time.
+Approximation algorithms are judged by:
+1. How fast they are
+2. How close they get to the optimal solution.
+
+The greedy algorithm for the current example works in O(n^2) time instead of O(2^n) time.
+
+Exercises: 
+For each of these algorithms, say whether it's a greedy algorithm or not.
+8.3: Quicksort = Not Greedy. It is a divide-and-conquer algorithm.
+8.4 Breadth-First Search = Book says yes. Internet says no.
+8.5 Dijkstra's Algorithm = Yes. It is a greedy algorithm.
+
+NP Completeness:
+Travelling salesman problem resembles a factorial function.
+1 city - 1 route
+2 cities - start at either (2) * 1 route = 2
+3 cities - Start at any (3) * 2 (routes for 2 cities) = 6
+4 cities - start at any (4) * 6 (routes for 3 cities) = 24
+5 cities - start at any (5) * 24 (routes for 4 cities) = 120
+And so on...
+
+Both travelling salesman problem and set covering problem require us to calculate every possible solution and find the best solution.
+These problems are NP complete.
+
+Some giveaways of NP-complete problems:
+1. Your algorithm runs quickly with a handful of items but really slows down with more items.
+2. "All combinations of X" usually point to an NP-complete problem.
+3. Do you have to calculate "every possible version" of X because you can't break it down into smaller sub-problems? Might be NP-complete
+4. If your problem involves a sequence(such as a sequence of cities, like traveling salesperson) and its hard to solve, it might be NP-complete
+5. If your problem involves a set (like a set of radio stations) and it's hard to solve, it might be NP-complete.
+6. Can you restate your problem as the set-covering problem or the traveling-salesman problem? Then your problem is definitely NP-complete.
+
+Exercises:
+8.6 A postman needs to deliver to 20 homes. He needs to find the shortest route that goes to all 20 homes. Is this an NP-complete problem?
+Ans: Yes.
+
+8.7 Finding the largest clique in a set of people (a clique is a set of people that know each other). Is this an NP-complete problem?
+Ans: Yes.
+
+8.8 You're making a map of the USA, and you need to color adjacent states with different colors. You have to find the minimum number of 
+colors you need so that no two adjacent states are the same color. Is this an NP-complete problem?
+Ans: Yes.
